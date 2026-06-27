@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ConversationCard } from "@/components/ConversationCard";
 import { QueueRail } from "@/components/QueueRail";
 import { Conversation } from "@/types/conversation";
+import { sortConversation } from "@/lib/sortConversation";
 
 export default function Home() {
   const [conversations, setConversations] = useState<Conversation[] | null>(null);
@@ -23,7 +24,7 @@ export default function Home() {
 
     loadConversations();
   }, []);
-
+// console.log(sortConversation(conversations).map((c) => c.customerName));
   if (error) {
     return <p className="p-8 text-sm text-red-600">Something went wrong loading conversations.</p>;
   }
@@ -32,8 +33,9 @@ export default function Home() {
     return <p className="p-8 text-sm text-zinc-500">Loading conversations...</p>;
   }
 
-  const activeConversation = conversations[0];
-  const upNext = conversations.slice(1);
+  const sorted = sortConversation(conversations);
+  const activeConversation = sorted[0];
+  const upNext = sorted.slice(1);
 
   return (
     <main className="min-h-screen bg-zinc-50 p-8">
