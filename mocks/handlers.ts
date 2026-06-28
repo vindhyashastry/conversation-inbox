@@ -53,4 +53,9 @@ http.patch("/api/conversations/:id/skip", async ({ params, request }) => {
 
   return HttpResponse.json({ success: true });
 }),
+http.post("/api/conversations/reset", async () => {
+  await delay(200);
+  conversations = mockConversations.map((c) => ({ ...c }));
+  return HttpResponse.json({ success: true });
+}),
 ];

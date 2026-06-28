@@ -1,6 +1,5 @@
 "use client";
 import {useEffect, useState} from "react";
-import { worker } from "../mocks/browser";
 
 export function MswProvider({ children } :{children:React.ReactNode}) {
     const [mswReady, setMswReady] = useState(false);
